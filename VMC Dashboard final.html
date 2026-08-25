@@ -316,9 +316,58 @@ footer{margin-top:26px;text-align:center;font-size:11.5px;color:var(--faint)}
 @media (max-width:1100px){.cols,.cols3{grid-template-columns:1fr}}
 @media (max-width:640px){.appbar-inner{padding:10px 14px}.wrap,.home-inner{padding:16px 14px 50px}.home-head{padding:20px}.home-head h1{font-size:22px}}
 @media print{header.appbar,.quickchips,.dash-filter,.btn,.dbtn,.pbtn{display:none!important}.box,.kpi,.panel,.dept{box-shadow:none}.scroll{max-height:none;overflow:visible}}
+
+/* ---- access gates ---- */
+#lockscreen,#gatescreen{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,#0d2445,#173a6b);padding:20px}
+#gatescreen{background:rgba(10,26,48,.72);backdrop-filter:blur(3px)}
+body.locked #lockscreen{display:flex}
+body.gated #gatescreen{display:flex}
+body.locked>header.appbar,body.locked>#home,body.locked>#dashview,body.locked>#mgrview,
+body.locked>#monthview,body.locked>#syncview{display:none!important}
+.lockcard{background:var(--card);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.35);padding:30px 28px;
+  width:100%;max-width:360px;text-align:center}
+.lockcard .applogo{margin:0 auto 14px}
+.lockcard h2{margin:0 0 6px;font-size:19px;color:var(--ink)}
+.lockhint{margin:0 0 18px;font-size:12.5px;color:var(--muted)}
+.lockcard input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:15px;
+  letter-spacing:2px;text-align:center;margin-bottom:14px;font-family:inherit}
+.lockcard input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(29,74,143,.14)}
+.lockcard .btn{width:100%;justify-content:center}
+.gatebtns{display:flex;gap:9px}.gatebtns .btn{flex:1}
+.lockerr{min-height:17px;margin-top:11px;font-size:12.5px;font-weight:700;color:var(--red)}
+@media print{#lockscreen,#gatescreen{display:none!important}}
 </style>
 </head>
-<body>
+<body class="locked">
+
+<!-- Entry lock. Client-side only: it keeps casual viewers out, it is not real security. -->
+<div id="lockscreen">
+  <div class="lockcard">
+    <div class="applogo">VMC</div>
+    <h2>VMC Checklist Dashboard</h2>
+    <p class="lockhint">Enter the access password to continue</p>
+    <input id="lockpw" type="password" autocomplete="off" placeholder="Password"
+           onkeydown="if(event.key==='Enter')tryUnlockApp()">
+    <button class="btn" onclick="tryUnlockApp()">Unlock</button>
+    <div id="lockerr" class="lockerr"></div>
+  </div>
+</div>
+
+<!-- Second gate, used by the restricted tabs -->
+<div id="gatescreen">
+  <div class="lockcard">
+    <h2 id="gatetitle">Restricted section</h2>
+    <p class="lockhint">This section needs the manager password</p>
+    <input id="gatepw" type="password" autocomplete="off" placeholder="Password"
+           onkeydown="if(event.key==='Enter')tryUnlockGate()">
+    <div class="gatebtns">
+      <button class="btn" onclick="tryUnlockGate()">Open</button>
+      <button class="btn ghost" onclick="closeGate()">Cancel</button>
+    </div>
+    <div id="gateerr" class="lockerr"></div>
+  </div>
+</div>
 
 <header class="appbar">
   <div class="hazard"></div>
@@ -1750,6 +1799,45 @@ function resetSheets(){
 }
 
 function jump(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});}
+
+/* ============================== ACCESS GATES ==============================
+   Two passwords: one to open the dashboard at all, one for the three
+   management sections. Both are checked in the browser only — this keeps
+   casual viewers out, it is not real security, since anyone who opens the
+   file in a text editor can read them. Unlock lasts for this page load only. */
+const APP_PW='VMC321', SECTION_PW='omer1234hamza';
+let APP_OPEN=false, SECTIONS_OPEN=false, gateNext=null;
+
+function tryUnlockApp(){
+  const inp=document.getElementById('lockpw'), err=document.getElementById('lockerr');
+  if(inp.value===APP_PW){
+    APP_OPEN=true; inp.value='';err.textContent='';
+    document.body.classList.remove('locked');
+    refreshAll();
+  }else{ err.textContent='Wrong password'; inp.select(); }
+}
+function openGate(title,run){
+  gateNext=run;
+  document.getElementById('gatetitle').textContent=title;
+  document.getElementById('gateerr').textContent='';
+  const inp=document.getElementById('gatepw'); inp.value='';
+  document.body.classList.add('gated');
+  setTimeout(()=>inp.focus(),40);
+}
+function closeGate(){ gateNext=null; document.body.classList.remove('gated'); }
+function tryUnlockGate(){
+  const inp=document.getElementById('gatepw'), err=document.getElementById('gateerr');
+  if(inp.value===SECTION_PW){
+    SECTIONS_OPEN=true; const run=gateNext; closeGate(); if(run)run();
+  }else{ err.textContent='Wrong password'; inp.select(); }
+}
+/* wrap the three restricted tabs — they ask once per page load, then open freely */
+[['openMonth','Monthly Report'],['openMgr','Manager Performance'],['openSync','Data source']]
+  .forEach(([fn,label])=>{
+    const orig=window[fn];
+    window[fn]=function(){ if(SECTIONS_OPEN)return orig.apply(this,arguments);
+      openGate(label,()=>orig.call(window)); };
+  });
 
 rebuildDerived();
 syncInputs(); recompute(); renderHome();
