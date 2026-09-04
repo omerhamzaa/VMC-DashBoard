@@ -71,6 +71,29 @@ nav.tabs button.active{background:var(--primary);color:#fff}
 .spacer{flex:1}
 .view-note{font-size:12px;color:var(--faint)}
 .dash-filter{display:flex;align-items:center}
+.simple-proj{margin-top:16px}
+.simple-proj:first-child{margin-top:6px}
+.simple-proj-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.simple-proj-head .name{font-family:var(--disp);font-size:17px;font-weight:800;color:var(--ink)}
+.simple-proj-head .owner{font-size:12px;color:var(--muted)}
+.simple-table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.simple-table thead th{background:linear-gradient(180deg,var(--navy),var(--ink2));color:#fff;text-align:left;padding:11px 14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.simple-table thead th.num,.simple-table td.num{text-align:right}
+.simple-table tbody td{padding:10px 14px;border-bottom:1px solid var(--line2);background:var(--card);font-weight:600;color:var(--text)}
+.simple-table tbody tr:nth-child(even) td{background:var(--panel2)}
+.simple-table tfoot td{padding:12px 14px;font-family:var(--disp);font-size:15px;font-weight:800;color:#fff;background:var(--primary-d)}
+.simple-table tfoot td.num{font-size:18px}
+.simple-pct{display:inline-flex;align-items:center;gap:6px;font-weight:800}
+.simple-pct .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.rawtable{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;font-family:var(--body);box-shadow:var(--shadow);border-radius:10px;overflow:hidden}
+.rawtable thead th{background:linear-gradient(180deg,var(--navy),var(--ink2));color:#fff;text-transform:uppercase;letter-spacing:.6px;font-size:11.5px;font-weight:700;position:sticky;top:0;padding:12px 14px;border:0;border-bottom:2px solid var(--hazard);z-index:2}
+.rawtable tbody td{padding:10px 14px;border:0;border-bottom:1px solid var(--line2);vertical-align:top;background:var(--card);color:var(--text);font-weight:500}
+.rawtable tbody tr:nth-child(even) td{background:var(--panel2)}
+.rawtable tbody tr.rw-ok td{background:#e7f4ea;color:#0f5c2e}
+.rawtable tbody tr.rw-bad td{background:#fdecea;color:#a3241a;font-weight:700}
+.rawtable tbody tr:hover td{filter:brightness(.96)}
+.rawtable tbody tr:last-child td{border-bottom:0}
+.rawtable a{color:var(--primary);word-break:break-all;text-decoration:underline;font-weight:600}
 .dash-filter label{font-size:12px;color:var(--muted);margin-right:6px;white-space:nowrap}
 .filter{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:8px 10px;color:var(--text);min-width:120px;font-family:inherit;font-size:14px}
 .filter:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(29,74,143,.14)}
@@ -131,6 +154,36 @@ nav.tabs button.active{background:var(--primary);color:#fff}
 .s-fault{background:#fee2e2;color:#b91c1c}
 .s-fault.zero{background:#dcfce7;color:#15803d}
 .s-na{background:#fef3c7;color:#92400e}
+.stat.tap{cursor:pointer;position:relative;transition:filter .12s,transform .12s}
+.stat.tap:hover{filter:brightness(.94);transform:translateY(-1px)}
+.stat.tap::after{content:'';position:absolute;right:5px;top:5px;width:5px;height:5px;border-radius:50%;
+  background:currentColor;opacity:.32}
+
+/* ---------- stat detail modal ---------- */
+.sm-back{position:fixed;inset:0;background:rgba(15,29,48,.5);z-index:60;display:none;
+  align-items:flex-start;justify-content:center;padding:36px 16px;overflow:auto}
+.sm-back.on{display:flex}
+.sm{background:var(--card);border-radius:var(--radius);box-shadow:0 20px 60px rgba(15,29,48,.3);
+  width:100%;max-width:860px;overflow:hidden}
+.sm-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);
+  background:var(--panel2);flex-wrap:wrap}
+.sm-head h3{font-family:var(--disp);font-size:17px;font-weight:800;color:var(--ink)}
+.sm-head .sub{font-size:11.5px;color:var(--muted);width:100%}
+.sm-x{margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:8px;
+  width:30px;height:30px;font-size:17px;line-height:1;cursor:pointer;color:var(--muted)}
+.sm-x:hover{background:var(--panel2);color:var(--ink)}
+.sm-body{padding:16px 20px;max-height:66vh;overflow:auto}
+.sm-table{width:100%;border-collapse:collapse}
+.sm-table th{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);font-weight:700;
+  text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card)}
+.sm-table td{padding:9px 10px;border-bottom:1px solid var(--line2);font-size:12.5px;vertical-align:top}
+.sm-table .num,.sm-table th.num{text-align:right;white-space:nowrap}
+.sm-table .qk{font-weight:700;color:var(--ink);white-space:nowrap}
+.sm-note{font-size:11.5px;color:var(--muted);margin-top:3px;font-style:italic}
+.sm-kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sm-kpis .c{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:8px 13px}
+.sm-kpis .c .l{font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);font-weight:800}
+.sm-kpis .c .v{font-family:var(--disp);font-size:19px;font-weight:800;color:var(--ink)}
 .dept-foot{padding:0 14px 13px;font-size:11.5px;color:var(--muted)}
 .bar{height:10px;border-radius:6px;background:var(--panel2);overflow:hidden;margin-bottom:6px}
 .bar i{display:block;height:100%;border-radius:6px;background:var(--green)}
@@ -219,6 +272,19 @@ footer{margin-top:26px;text-align:center;font-size:11.5px;color:var(--faint)}
 .badge-ok{background:#dcfce7;color:#15803d}
 .badge-mid{background:#fef3c7;color:#92400e}
 .badge-bad{background:#fee2e2;color:#b91c1c}
+.unit-btn{margin-top:6px;font:inherit;font-size:11px;font-weight:700;color:#1d4a8f;background:#e6eefb;
+  border:1px solid #c7d9f2;border-radius:6px;padding:3px 9px;cursor:pointer;line-height:1.5}
+.unit-btn:hover{background:#d7e4f8}
+.unit-row>td{background:var(--panel2);padding:0}
+.unit-panel{padding:14px 16px}
+.unit-head{font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:10px;display:flex;
+  align-items:baseline;gap:10px;flex-wrap:wrap}
+.unit-table{width:100%;border-collapse:collapse}
+.unit-table th{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);
+  font-weight:700;text-align:left;padding:6px 10px;border-bottom:1px solid var(--line)}
+.unit-table td{padding:8px 10px;border-bottom:1px solid var(--line2);font-size:12.5px;vertical-align:middle}
+.unit-table .num{text-align:right}
+.unit-table th.num{text-align:right}
 .miss-block{margin-bottom:14px}
 .miss-block .h{font-size:12.5px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 
@@ -382,8 +448,10 @@ body.locked>#monthview,body.locked>#syncview{display:none!important}
     <nav class="tabs">
       <button id="tab-home" class="active" onclick="goHome()">🏢 Projects</button>
       <button id="tab-dash" onclick="openProj(state.proj)">📊 Dashboard</button>
+      <button id="tab-daily" onclick="openDaily()">📋 Daily Update</button>
       <button id="tab-month" onclick="openMonth()">🗓 Monthly Report</button>
       <button id="tab-mgr" onclick="openMgr()">👤 Manager Performance</button>
+      <button id="tab-raw" onclick="openRaw()">🧾 Detail View</button>
       <button id="tab-sync" onclick="openSync()">🔗 Data source</button>
     </nav>
     <span class="spacer"></span>
@@ -500,6 +568,48 @@ body.locked>#monthview,body.locked>#syncview{display:none!important}
   <footer>VMC Checklist Dashboard · Data through 11 Aug 2026 · Source: 10 checklist response workbooks, 3,325 records</footer>
 </div>
 
+<div class="wrap" id="rawview" style="display:none">
+
+  <div class="sec-head top">
+    <div><div class="eyebrow">Detail records</div><h2>Checklist Detail View</h2></div>
+    <div class="spacer"></div>
+    <button class="btn sm ghost" onclick="clearRawFilters()">✕ Clear filters</button>
+  </div>
+
+  <div class="quickchips" style="flex-wrap:wrap;gap:10px 16px;margin-bottom:14px">
+    <div class="dash-filter"><label for="rw-year">Year</label>
+      <select id="rw-year" class="filter" onchange="renderRawFilters()"><option value="">All</option></select></div>
+    <div class="dash-filter"><label for="rw-month">Month</label>
+      <select id="rw-month" class="filter" onchange="renderRawFilters()"><option value="">All</option></select></div>
+    <div class="dash-filter"><label for="rw-date">Date</label>
+      <select id="rw-date" class="filter" onchange="renderRawTable()"><option value="">All</option></select></div>
+    <div class="dash-filter"><label for="rw-seg">Segment</label>
+      <select id="rw-seg" class="filter" onchange="renderRawFilters()"><option value="">All</option></select></div>
+    <div class="dash-filter"><label for="rw-resp">Response</label>
+      <select id="rw-resp" class="filter" onchange="renderRawTable()">
+        <option value="">All</option><option value="OK">OK</option><option value="Not-Okay">Not-Okay</option>
+      </select></div>
+    <div class="dash-filter"><label for="rw-gen">Generator Capacity</label>
+      <select id="rw-gen" class="filter" onchange="renderRawTable()"><option value="">All</option></select></div>
+    <div class="dash-filter"><label for="rw-lift">Lift Number</label>
+      <select id="rw-lift" class="filter" onchange="renderRawTable()"><option value="">All</option></select></div>
+    <div class="dash-filter"><label for="rw-proj">Project</label>
+      <select id="rw-proj" class="filter" onchange="renderRawTable()"><option value="">All</option></select></div>
+  </div>
+
+  <div class="box" style="padding:0;overflow:hidden">
+    <div class="sub" id="rawMeta" style="padding:12px 14px 0"></div>
+    <div class="scroll" style="max-height:70vh;overflow:auto">
+      <table class="rawtable">
+        <thead><tr><th>Attribute</th><th style="width:110px">Response</th><th>Comment</th><th style="width:220px">Picture</th></tr></thead>
+        <tbody id="rawRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>Detail View · every attribute, response, comment and picture link from every submitted sheet, across all checklists</footer>
+</div>
+
 <div class="wrap" id="syncview" style="display:none">
 
   <div class="sec-head top">
@@ -533,6 +643,37 @@ body.locked>#monthview,body.locked>#syncview{display:none!important}
   <footer>Data source · VMC Checklist Dashboard</footer>
 </div>
 
+<div class="wrap" id="dailyview" style="display:none">
+
+  <div class="sec-head top">
+    <div><div class="eyebrow">Report</div><h2>Daily Update</h2></div>
+    <div class="spacer"></div>
+    <div class="dash-filter"><label for="d-date">Date</label>
+      <input type="date" id="d-date" onchange="renderDaily()"></div>
+  </div>
+
+  <div class="box" style="margin-bottom:14px">
+    <h3>Aaj kya pending hai</h3>
+    <div class="sub" id="dailySub"></div>
+    <div id="dailyCards"></div>
+  </div>
+
+  <div class="box">
+    <div class="today-head" style="margin-bottom:10px">
+      <div><h3>Message — copy karke bhej dein</h3>
+        <div class="sub">Plain text, WhatsApp ya email dono mein chal jayega</div></div>
+      <div class="tcount">
+        <button class="unit-btn" style="font-size:12px;padding:7px 14px" onclick="copyDaily()" id="dailyCopyBtn">Copy message</button>
+      </div>
+    </div>
+    <textarea id="dailyMsg" readonly
+      style="width:100%;min-height:230px;font:12.5px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;
+             color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+             padding:14px 16px;resize:vertical"></textarea>
+  </div>
+
+</div>
+
 <div class="wrap" id="monthview" style="display:none">
 
   <div class="sec-head top">
@@ -547,6 +688,14 @@ body.locked>#monthview,body.locked>#syncview{display:none!important}
 
   <div class="rpt-title" id="rptTitle"></div>
   <div class="rpt-kpis" id="rptKpis"></div>
+
+  <div class="box" style="margin-bottom:14px">
+    <div class="sec-head" style="margin-bottom:2px">
+      <div><div class="eyebrow">For the CEO</div><h3 style="margin:0">Project-wise Submission Summary</h3></div>
+    </div>
+    <div class="sub">Har checklist ki required vs submitted count, Sundays excluded. Percentage ke sath — end mein overall.</div>
+    <div id="rptSimple"></div>
+  </div>
 
   <div class="box" style="margin-bottom:14px">
     <h3>Checklist compliance by department</h3>
@@ -733,7 +882,7 @@ function compute(k){
   const start = state.from>FIRST[k]?state.from:FIRST[k];
   const end   = state.to<MAX?state.to:MAX;
   const have=new Set(rows.map(r=>r[0]));
-  const exp=D.expected||0, dayUnits={};
+  const exp=expectedFor(k,state.proj), dayUnits={};
   rows.forEach(r=>{(dayUnits[r[0]]=dayUnits[r[0]]||new Set()).add(r[8]);});
   const missing=[]; const partial=[]; let span=0;
   if(diffDays(start,end)>=0){
@@ -834,9 +983,11 @@ function openProj(p){
   document.getElementById('mgrview').style.display='none';
   document.getElementById('monthview').style.display='none';
   document.getElementById('syncview').style.display='none';
+  document.getElementById('rawview').style.display='none';
   document.getElementById('tab-sync').classList.remove('active');
   document.getElementById('tab-mgr').classList.remove('active');
   document.getElementById('tab-month').classList.remove('active');
+  document.getElementById('tab-raw').classList.remove('active');
   document.getElementById('tab-home').classList.remove('active');
   document.getElementById('tab-dash').classList.add('active');
   document.getElementById('home').style.display='none';
@@ -852,9 +1003,11 @@ function goHome(){
   document.getElementById('mgrview').style.display='none';
   document.getElementById('monthview').style.display='none';
   document.getElementById('syncview').style.display='none';
+  document.getElementById('rawview').style.display='none';
   document.getElementById('tab-sync').classList.remove('active');
   document.getElementById('tab-mgr').classList.remove('active');
   document.getElementById('tab-month').classList.remove('active');
+  document.getElementById('tab-raw').classList.remove('active');
   document.getElementById('tab-dash').classList.remove('active');
   document.getElementById('tab-home').classList.add('active');
   renderHome();
@@ -882,7 +1035,8 @@ function renderTodayBoard(){
         const got=v.dayUnits[state.from]?v.dayUnits[state.from].size:0;
         if(got<v.exp){
           const doneU=new Set([...v.dayUnits[state.from]].map(i=>D.units[i]));
-          const missU=D.units.filter(u=>!doneU.has(u));
+          const scopeU=state.proj==='ALL'?D.units:unitIdxFor(k,state.proj).map(i=>D.units[i]);
+          const missU=scopeU.filter(u=>!doneU.has(u));
           return {k,state:'part',msg:got+' of '+v.exp+' done · missing '+missU.map(u=>u.split('–')[0].trim()).join(', ')};
         }
         return {k,state:'done',msg:'All '+v.exp+' done · first at '+t};
@@ -952,9 +1106,9 @@ function renderTop(){
         <span class="tag ${noProj?'none':(v.sheets?(stale?'stale':''):'none')}">${noProj?'No project':(v.sheets?(stale?v.gap+'d old':'Current'):'No data')}</span>
       </div>
       <div class="stats">
-        <div class="stat s-attr"><div class="t">Attributes</div><div class="n">${v.attrs.length}</div></div>
-        <div class="stat s-fault ${v.bad?'':'zero'}"><div class="t">Faults</div><div class="n">${v.sheets?fmt(v.bad):'– –'}</div></div>
-        <div class="stat s-na"><div class="t">N/A</div><div class="n">${v.sheets?fmt(v.na):'– –'}</div></div>
+        <div class="stat s-attr tap" onclick="event.stopPropagation();openStat('${k}','attrs')"><div class="t">Attributes</div><div class="n">${v.attrs.length}</div></div>
+        <div class="stat s-fault tap ${v.bad?'':'zero'}" onclick="event.stopPropagation();openStat('${k}','faults')"><div class="t">Faults</div><div class="n">${v.sheets?fmt(v.bad):'– –'}</div></div>
+        <div class="stat s-na tap" onclick="event.stopPropagation();openStat('${k}','na')"><div class="t">N/A</div><div class="n">${v.sheets?fmt(v.na):'– –'}</div></div>
       </div>
       <div class="dept-foot">
         <div class="bar"><i class="${cls}" style="width:${pass}%"></i></div>
@@ -1175,8 +1329,10 @@ function openMgr(){
   document.getElementById('home').style.display='none';
   document.getElementById('monthview').style.display='none';
   document.getElementById('syncview').style.display='none';
+  document.getElementById('rawview').style.display='none';
   document.getElementById('tab-sync').classList.remove('active');
   document.getElementById('tab-month').classList.remove('active');
+  document.getElementById('tab-raw').classList.remove('active');
   document.getElementById('dashview').style.display='none';
   document.getElementById('mgrview').style.display='';
   document.getElementById('tab-home').classList.remove('active');
@@ -1325,6 +1481,28 @@ function renderMgr(){
 /* Accountable owner per project — set by management, not derived from the sheets */
 const OWNER={'V1':'Hassnain','V2':'Umair'};
 const OWNER_UNASSIGNED='Not assigned';
+
+/* Units that simply don't exist on a given project — set by management, not derived from the sheets.
+   V2 has 3 lifts, there is no cargo lift there, so it must never be counted as a miss.
+   Match is a case-insensitive substring of the unit name. */
+const UNIT_EXCLUDE = { Elevator: { 'V2': ['Cargo'] } };
+
+/* indices of the units that actually exist on this project */
+function unitIdxFor(k,proj){
+  const U=(RAW[k]||{}).units||[];
+  const ex=(UNIT_EXCLUDE[k]||{})[proj]||[];
+  return U.map((u,i)=>i).filter(i=>!ex.some(x=>U[i].toLowerCase().includes(x.toLowerCase())));
+}
+/* how many sheets a day this form owes on this project */
+function expectedFor(k,proj){
+  const D=RAW[k]||{};
+  if(!(D.expected>1)||!(D.units||[]).length) return D.expected||0;
+  if(proj==='ALL'){
+    const ps=(DEPT_PROJECTS[k]||[]).filter(p=>p!=='No project field');
+    return ps.length ? ps.reduce((a,p)=>a+unitIdxFor(k,p).length,0) : D.expected;
+  }
+  return unitIdxFor(k,proj).length;
+}
 /* the sheets record Hassnain's name as "Hussnian" */
 const FILER_ALIAS={'Hussnian':'Hassnain'};
 const disp=n=>FILER_ALIAS[n]||n;
@@ -1346,7 +1524,9 @@ function rebuildMonthMeta(){
     const c=[0,0,0,0,0,0,0];
     D.rows.forEach(r=>{c[new Date(r[0]+'T00:00:00').getDay()]++;});
     const sun=c[0], wk=(c[1]+c[2]+c[3]+c[4]+c[5]+c[6])/6;
-    SUNDAY_OPS[k]= wk>0 && sun >= wk*0.4;
+    /* every checklist is measured on the same 6-day week (Sundays excluded).
+       Sunday sheets still get logged separately as bonus, they just don't add to Required. */
+    SUNDAY_OPS[k]= false;
     const cc={};
     D.rows.forEach(r=>{const p=D.projs[r[6]]; if(p!=='Not tagged') cc[p]=(cc[p]||0)+1;});
     DEPT_PROJECTS[k]=Object.keys(cc).filter(p=>cc[p]>=10);
@@ -1369,29 +1549,55 @@ function monthCompute(){
     if(proj!=='ALL' && !D.hasProj){out.push({k,na:true});return;}
     // units per day expected
     const nProj = proj==='ALL' ? Math.max(1,DEPT_PROJECTS[k].filter(p=>p!=='No project field').length||1) : 1;
-    const perDay = nProj * (D.expected||1);
+    /* projects in view, and how many sheets a day each owes (V2 has no cargo lift) */
+    const scopeProjs = proj==='ALL' ? DEPT_PROJECTS[k].filter(p=>p!=='No project field') : [proj];
+    const multiUnit = (D.expected||0)>1 && (D.units||[]).length>0;
+    const perDay = multiUnit ? (expectedFor(k,proj)||1) : nProj*(D.expected||1);
     // window: from first ever sheet in scope, to min(month end, MAX)
     const firstRow=D.rows.find(inScope);
     const first=firstRow?firstRow[0]:null;
-    const start = first && first>mStart ? first : mStart;
+    /* full month baseline — not from the first sheet filed, so a late start still owes the whole month */
+    const start = mStart;
     const end   = mEnd<MAX?mEnd:MAX;
     let workDays=0, missDays=[], sundaySheets=0, filedWork=0, filed=0;
     const byDay={};
+    const byUnit={};              // unit index -> { date: Set(project) }
+    const workDayList=[];
     D.rows.forEach(r=>{
       if(r[0]<mStart||r[0]>mEnd||!inScope(r))return;
       filed++;
       const isSun=new Date(r[0]+'T00:00:00').getDay()===0;
       if(isSun&&!SUNDAY_OPS[k]){sundaySheets++;return;}
       filedWork++;(byDay[r[0]]=byDay[r[0]]||new Set()).add(r[6]+'|'+r[8]);
+      if(r[8]>=0){const u=byUnit[r[8]]=byUnit[r[8]]||{};(u[r[0]]=u[r[0]]||new Set()).add(r[6]);}
     });
     if(first && diffDays(start,end)>=0){
       for(let d=start;d<=end;d=addDays(d,1)){
         const sun=new Date(d+'T00:00:00').getDay()===0;
         if(sun&&!SUNDAY_OPS[k])continue;
-        workDays++;
+        workDays++;workDayList.push(d);
         const got=byDay[d]?byDay[d].size:0;
         if(got<perDay)missDays.push({d,got,need:perDay});
       }
+    }
+    /* per-unit split — only meaningful where one form covers several units (Elevator: 4 lifts) */
+    let units=null;
+    if(multiUnit){
+      units=D.units.map((name,i)=>{
+        /* how many projects in view actually have this lift */
+        const nP=scopeProjs.filter(p=>unitIdxFor(k,p).includes(i)).length
+                 || (scopeProjs.length?0:1);
+        if(!nP) return null;
+        const got=byUnit[i]||{};
+        let f=0;const md=[];
+        workDayList.forEach(d=>{
+          const n=got[d]?got[d].size:0;f+=Math.min(n,nP);
+          if(n<nP)md.push({d,got:n,need:nP});
+        });
+        const req=workDays*nP;
+        return {i,name,required:req,filed:f,short:Math.max(0,req-f),missDays:md,
+                pct:req?Math.min(100,f/req*100):0};
+      }).filter(Boolean).sort((a,b)=>a.pct-b.pct);
     }
     const required=workDays*perDay;
     const pct=required?Math.min(100,filedWork/required*100):0;
@@ -1403,15 +1609,15 @@ function monthCompute(){
     out.push({k,na:false,perDay,workDays,required,filed,filedWork,sundaySheets,
       short:Math.max(0,required-filedWork),missDays,pct,
       who:top?top[0]:'—',whoN:top?top[1]:0,whoAll:Object.entries(who).sort((a,b)=>b[1]-a[1]),
-      sevenDay:SUNDAY_OPS[k],first});
+      sevenDay:SUNDAY_OPS[k],first,units});
   });
   return {rows:out,mStart,mEnd,sundays,label:new Date(mStart+'T00:00:00').toLocaleDateString('en-GB',{month:'long',year:'numeric'})};
 }
 
 function openMonth(){
-  ['home','dashview','mgrview','syncview'].forEach(id=>document.getElementById(id).style.display='none');
+  ['home','dashview','mgrview','syncview','rawview'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('monthview').style.display='';
-  ['tab-home','tab-dash','tab-mgr','tab-sync'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  ['tab-home','tab-dash','tab-mgr','tab-sync','tab-raw'].forEach(id=>document.getElementById(id).classList.remove('active'));
   document.getElementById('tab-month').classList.add('active');
   window.scrollTo(0,0);
   const ms=document.getElementById('r-month');
@@ -1424,6 +1630,257 @@ function openMonth(){
   ms.value=rstate.month;
   document.getElementById('r-project').value=rstate.proj;
   renderMonth();
+}
+
+/* ================= DAILY UPDATE ================= */
+/* One plain-text line-up of what each project still owes for a single day */
+function dailyCompute(date){
+  const projs = PROJECTS.filter(p=>OWNER[p]);
+  return projs.map(p=>{
+    const done=[], pending=[], partial=[], na=[];
+    ORDER.forEach(k=>{
+      const D=RAW[k];
+      if(!D.hasProj){na.push(k);return;}
+      const rows=D.rows.filter(r=>r[0]===date && D.projs[r[6]]===p);
+      if(!rows.length){pending.push(k);return;}
+      const exp=expectedFor(k,p);
+      if(exp>1 && (D.units||[]).length){
+        const scope=unitIdxFor(k,p);
+        const got=new Set(rows.map(r=>r[8]).filter(i=>scope.includes(i)));
+        if(got.size<exp){
+          const miss=scope.filter(i=>!got.has(i)).map(i=>D.units[i].split('–')[0].trim());
+          partial.push({k,got:got.size,exp,miss});
+          return;
+        }
+      }
+      done.push(k);
+    });
+    return {p,owner:OWNER[p]||OWNER_UNASSIGNED,done,pending,partial,na,
+            total:done.length+pending.length+partial.length};
+  });
+}
+
+function dailyText(date,data){
+  const L=[];
+  L.push('Daily Checklist Update — '+dmy(date));
+  L.push('');
+  data.forEach(d=>{
+    L.push('Project '+d.p+' ('+d.owner+')');
+    L.push('Filed: '+d.done.length+' of '+d.total);
+    if(d.pending.length) L.push('Pending: '+d.pending.join(', '));
+    if(d.partial.length) d.partial.forEach(x=>
+      L.push('Incomplete: '+x.k+' — '+x.got+' of '+x.exp+' done, missing '+x.miss.join(', ')));
+    if(!d.pending.length && !d.partial.length) L.push('All checklists complete.');
+    L.push('');
+  });
+  const noProj=data.length?data[0].na:[];
+  if(noProj.length) L.push('Note: '+noProj.join(' & ')+' — no project column on the form, counted separately.');
+  return L.join('\n').trim();
+}
+
+function renderDaily(){
+  const di=document.getElementById('d-date');
+  if(!di.value) di.value = TODAY;
+  if(di.max!==MAX) di.max=MAX;
+  const date=di.value;
+  const data=dailyCompute(date);
+
+  document.getElementById('dailySub').textContent =
+    dmy(date)+' · '+(date===TODAY?'today':'selected date')+' — red means koi sheet file nahi hui';
+
+  document.getElementById('dailyCards').innerHTML = data.map(d=>{
+    const pill=(t,c)=>`<span class="pill ${c}">${t}</span>`;
+    const items=[
+      ...d.pending.map(k=>`<div class="tile miss"><div class="mark">&#10007;</div>
+          <div><div class="nm">${k}</div><div class="st">Not filed</div></div></div>`),
+      ...d.partial.map(x=>`<div class="tile part"><div class="mark">!</div>
+          <div><div class="nm">${x.k}</div><div class="st">${x.got} of ${x.exp} · missing ${esc(x.miss.join(', '))}</div></div></div>`),
+      ...d.done.map(k=>`<div class="tile done"><div class="mark">&#10003;</div>
+          <div><div class="nm">${k}</div><div class="st">Filed</div></div></div>`)
+    ].join('');
+    return `<div style="margin-bottom:18px">
+      <div class="today-head" style="margin-bottom:10px">
+        <div><h3>Project ${esc(d.p)} — ${esc(d.owner)}</h3></div>
+        <div class="tcount">
+          <div class="c done"><b>${d.done.length}</b> filed</div>
+          ${d.partial.length?`<div class="c"><b style="color:#b45309">${d.partial.length}</b> incomplete</div>`:''}
+          <div class="c miss"><b>${d.pending.length}</b> pending</div>
+        </div>
+      </div>
+      <div class="tiles">${items}</div>
+    </div>`;
+  }).join('') || '<div class="empty-msg">No project-tagged checklists to report</div>';
+
+  document.getElementById('dailyMsg').value = dailyText(date,data);
+  document.getElementById('dailyCopyBtn').textContent='Copy message';
+}
+
+function copyDaily(){
+  const ta=document.getElementById('dailyMsg'), btn=document.getElementById('dailyCopyBtn');
+  const done=()=>{btn.textContent='Copied ✓';setTimeout(()=>btn.textContent='Copy message',1800);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ta.value).then(done,()=>{ta.select();document.execCommand('copy');done();});
+  }else{ta.select();document.execCommand('copy');done();}
+}
+
+function openDaily(){
+  ['home','dashview','mgrview','monthview','syncview','rawview']
+    .forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none';});
+  ['tab-home','tab-dash','tab-mgr','tab-month','tab-sync','tab-raw']
+    .forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('active');});
+  document.getElementById('dailyview').style.display='';
+  document.getElementById('tab-daily').classList.add('active');
+  window.scrollTo(0,0);
+  renderDaily();
+}
+
+/* ---------- stat tile drill-down ---------- */
+function openStat(k,kind){
+  const v=C[k]; if(!v) return;
+  const period=dmy(state.from)+' to '+dmy(state.to)
+    +(state.proj!=='ALL'?' · Project '+state.proj:'');
+  let title='', sub='', body='';
+
+  if(kind==='attrs'){
+    title=k+' — attributes';
+    sub=`${v.attrs.length} checks on this form · ${period}`;
+    body=`<div class="sm-kpis">
+        <div class="c"><div class="l">Checks</div><div class="v">${fmt(v.attrs.length)}</div></div>
+        <div class="c"><div class="l">Passed</div><div class="v">${fmt(v.ok)}</div></div>
+        <div class="c"><div class="l">Faults</div><div class="v">${fmt(v.bad)}</div></div>
+        <div class="c"><div class="l">Left blank</div><div class="v">${fmt(v.na)}</div></div>
+      </div>
+      <table class="sm-table"><thead><tr><th>#</th><th>Attribute</th>
+        <th class="num">Passed</th><th class="num">Faults</th><th class="num">N/A</th><th class="num">Fault rate</th>
+      </tr></thead><tbody>${v.attrs.map(a=>{
+        const ans=a.ok+a.bad, rate=ans?a.bad/ans*100:0;
+        return `<tr><td class="qk">${esc(a.k)}</td><td>${esc(a.text)}</td>
+          <td class="num">${fmt(a.ok)}</td>
+          <td class="num" style="color:${a.bad?'#b91c1c':'inherit'};font-weight:${a.bad?700:400}">${fmt(a.bad)}</td>
+          <td class="num" style="color:${a.na?'#92400e':'inherit'}">${fmt(a.na)}</td>
+          <td class="num">${rate.toFixed(1)}%</td></tr>`;}).join('')}
+      </tbody></table>`;
+  }
+
+  if(kind==='faults'){
+    title=k+' — faults';
+    sub=`${fmt(v.bad)} fault${v.bad===1?'':'s'} logged · ${period}`;
+    if(!v.bad){
+      body='<div class="empty-msg">No faults logged in this period</div>';
+    }else{
+      body=`<div class="sm-kpis">
+          <div class="c"><div class="l">Faults</div><div class="v">${fmt(v.bad)}</div></div>
+          <div class="c"><div class="l">With a cause</div><div class="v">${fmt(v.bad-v.nonote)}</div></div>
+          <div class="c"><div class="l">No cause written</div><div class="v">${fmt(v.nonote)}</div></div>
+          <div class="c"><div class="l">Attributes hit</div><div class="v">${fmt(v.byattr.length)}</div></div>
+        </div>
+        <table class="sm-table"><thead><tr><th>Attribute</th><th class="num">Faults</th>
+          <th class="num">Fail rate</th><th class="num">With cause</th><th class="num">Last seen</th>
+        </tr></thead><tbody>${v.byattr.map(a=>`<tr>
+          <td><span class="qk">${esc(a.q)}</span> ${esc(a.text)}</td>
+          <td class="num" style="font-weight:700;color:#b91c1c">${fmt(a.n)}</td>
+          <td class="num">${a.rate.toFixed(1)}%</td>
+          <td class="num">${fmt(a.notes)}/${fmt(a.n)}</td>
+          <td class="num">${dmy(a.last)}</td></tr>`).join('')}
+        </tbody></table>
+        <div class="unit-head" style="margin:18px 0 8px">Every fault, newest first</div>
+        <table class="sm-table"><thead><tr><th class="num">Date</th><th>Attribute</th><th>Cause written</th><th>Filed by</th>
+        </tr></thead><tbody>${v.faults.slice().sort((a,b)=>b.date<a.date?-1:1).map(f=>`<tr>
+          <td class="num">${dmy(f.date)}</td>
+          <td><span class="qk">${esc(v.attrs[f.qi].k)}</span> ${esc(v.attrs[f.qi].text)}</td>
+          <td>${f.note?esc(f.note):'<span class="pill p-bad">no cause</span>'}</td>
+          <td>${esc(disp(f.by.split(' · ')[0]))}<div class="sm-note">${esc(f.by.split(' · ')[1]||'')}</div></td>
+        </tr>`).join('')}</tbody></table>`;
+    }
+  }
+
+  if(kind==='na'){
+    const blanks=v.attrs.filter(a=>a.na>0).sort((a,b)=>b.na-a.na);
+    title=k+' — left blank (N/A)';
+    sub=`${fmt(v.na)} blank answer${v.na===1?'':'s'} across ${fmt(v.sheets)} sheets · ${period}`;
+    body=!v.na ? '<div class="empty-msg">Nothing was left blank in this period</div>'
+      : `<div class="sm-kpis">
+          <div class="c"><div class="l">Blank answers</div><div class="v">${fmt(v.na)}</div></div>
+          <div class="c"><div class="l">Attributes affected</div><div class="v">${fmt(blanks.length)}</div></div>
+          <div class="c"><div class="l">Of all answers</div><div class="v">${v.total?(v.na/v.total*100).toFixed(1):'0'}%</div></div>
+        </div>
+        <table class="sm-table"><thead><tr><th>Attribute</th><th class="num">Blank</th>
+          <th class="num">Answered</th><th class="num">Blank rate</th></tr></thead>
+        <tbody>${blanks.map(a=>{const tot=a.ok+a.bad+a.na;return `<tr>
+          <td><span class="qk">${esc(a.k)}</span> ${esc(a.text)}</td>
+          <td class="num" style="font-weight:700;color:#92400e">${fmt(a.na)}</td>
+          <td class="num">${fmt(a.ok+a.bad)}</td>
+          <td class="num">${tot?(a.na/tot*100).toFixed(1):'0'}%</td></tr>`;}).join('')}
+        </tbody></table>`;
+  }
+
+  document.getElementById('smTitle').textContent=title;
+  document.getElementById('smSub').textContent=sub;
+  document.getElementById('smBody').innerHTML=body;
+  document.getElementById('smBack').classList.add('on');
+}
+function closeStat(){document.getElementById('smBack').classList.remove('on');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStat();});
+
+/* per-unit (per-lift) breakdown panel, shown under a department row on demand */
+function unitPanel(r){
+  const cls=p=>p>=95?'#16a34a':p>=80?'#f5a623':'#dc2626';
+  const worst=r.units.filter(u=>u.short>0);
+  return `<div class="unit-panel">
+    <div class="unit-head">${esc(r.k)} — breakdown by ${esc(RAW[r.k].unitLabel||'unit')}
+      <span class="who">${r.units.length} units · ${fmt(r.workDays)} working days each${r.perDay>r.units.length?' · per project':''}</span></div>
+    <table class="unit-table"><thead><tr>
+      <th>${esc(RAW[r.k].unitLabel||'Unit')}</th><th class="num">Required</th><th class="num">Filed</th>
+      <th class="num">Missing</th><th style="width:110px">Compliance</th></tr></thead><tbody>
+      ${r.units.map(u=>`<tr>
+        <td><span class="rname">${esc(u.name)}</span></td>
+        <td class="num">${fmt(u.required)}</td>
+        <td class="num">${fmt(u.filed)}</td>
+        <td class="num">${u.short?`<span class="pill p-bad">${fmt(u.short)}</span>`:'<span class="zero">0</span>'}</td>
+        <td><span class="covbar"><i style="width:${u.pct}%;background:${cls(u.pct)}"></i></span>
+            <span class="who">${u.pct.toFixed(0)}%</span></td></tr>`).join('')}
+    </tbody></table>
+    ${worst.length?worst.map(u=>`<div class="miss-block" style="margin-top:12px">
+        <div class="h">${esc(u.name)} — missing days
+          <span class="pill p-na">${fmt(u.missDays.length)} days</span></div>
+        <div class="days">${u.missDays.map(x=>`<span class="day${x.got?' part':''}">${dmy(x.d)}${x.need>1?` · ${x.got}/${x.need}`:''}</span>`).join('')}</div>
+      </div>`).join(''):'<div class="empty-msg" style="margin-top:10px">Every unit covered every working day</div>'}
+  </div>`;
+}
+function toggleUnits(id){
+  const row=document.getElementById(id), btn=document.getElementById(id+'-btn');
+  if(!row)return;
+  const open=row.style.display==='none';
+  row.style.display=open?'':'none';
+  if(btn)btn.textContent=open?'Detail ▴':'Detail ▾';
+}
+
+function renderSimpleSummary(){
+  const cls=p=>p>=95?'#16a34a':p>=80?'#f5a623':'#dc2626';
+  const savedProj=rstate.proj;
+  const scope = savedProj==='ALL' ? PROJECTS.filter(p=>OWNER[p]) : [savedProj];
+  let html='';
+  scope.forEach(p=>{
+    rstate.proj=p;
+    const rows=monthCompute().rows.filter(r=>!r.na&&r.first);
+    const totReq=rows.reduce((a,r)=>a+r.required,0);
+    const totFil=rows.reduce((a,r)=>a+r.filedWork,0);
+    const totPct=totReq?Math.min(100,totFil/totReq*100):0;
+    html+=`<div class="simple-proj">
+      <div class="simple-proj-head"><span class="name">Project ${esc(p)}</span><span class="owner">${esc(OWNER[p]||OWNER_UNASSIGNED)}</span></div>
+      <table class="simple-table"><thead><tr><th>Checklist</th><th class="num">Required</th><th class="num">Submitted</th><th class="num">% Submitted</th></tr></thead>
+      <tbody>${rows.map(r=>{
+        const uid='sud-'+esc(p).replace(/[^A-Za-z0-9]/g,'')+'-'+r.k.replace(/[^A-Za-z0-9]/g,'');
+        return `<tr><td>${esc(r.k)}${r.units?` <button class="unit-btn" style="margin:0 0 0 8px;vertical-align:middle" id="${uid}-btn" onclick="toggleUnits('${uid}')">Detail ▾</button>`:''}</td>
+        <td class="num">${fmt(r.required)}</td><td class="num">${fmt(r.filedWork)}</td>
+        <td class="num"><span class="simple-pct" style="color:${cls(r.pct)}"><span class="dot" style="background:${cls(r.pct)}"></span>${r.pct.toFixed(0)}%</span></td></tr>
+        ${r.units?`<tr id="${uid}" class="unit-row" style="display:none"><td colspan="4">${unitPanel(r)}</td></tr>`:''}`;}).join('')}</tbody>
+      <tfoot><tr><td>Overall — ${esc(p)}</td><td class="num">${fmt(totReq)}</td><td class="num">${fmt(totFil)}</td>
+        <td class="num" style="color:${cls(totPct)}">${totPct.toFixed(0)}%</td></tr></tfoot></table>
+    </div>`;
+  });
+  rstate.proj=savedProj;
+  document.getElementById('rptSimple').innerHTML = html || '<div class="empty-msg">No project-tagged data this month</div>';
 }
 
 function renderMonth(){
@@ -1452,13 +1909,17 @@ function renderMonth(){
    <div class="kpi"><div class="v">${live.filter(r=>r.pct>=95).length}/${live.length}</div><div class="k">Departments on track</div><div class="s">95% or better</div></div>`;
 
   document.getElementById('rptSub').textContent=
-    `Required = working days × checklists per day. Elevator counts 4 lifts a day${rstate.proj==='ALL'?' per project':''}; CCTV runs 7 days a week so its Sundays are included.`;
+    `Required = working days in the month × checklists per day, Sundays excluded for every checklist. Elevator counts ${expectedFor('Elevator',rstate.proj)} lifts a day${rstate.proj==='ALL'?' across the projects':' on '+rstate.proj}. Sunday sheets are shown as bonus.`;
+
+  renderSimpleSummary();
 
   document.getElementById('rptRows').innerHTML=R.rows.map(r=>{
     if(r.na)return `<tr><td><span class="rname">${r.k}</span></td><td colspan="7" class="who">This form has no project field — shown only under All Projects</td></tr>`;
     if(!r.first)return `<tr><td><span class="rname">${r.k}</span></td><td class="who">—</td><td class="num">—</td><td class="num">—</td><td class="num">0</td><td class="num">—</td><td class="who">Not reporting in this project</td><td><span class="pill p-dept">n/a</span></td></tr>`;
+    const uid='ud-'+r.k.replace(/[^A-Za-z0-9]/g,'');
     return `<tr>
-      <td><span class="rname">${r.k}</span><div class="who">${r.perDay} per day${r.sevenDay?' · 7 days a week':''}</div></td>
+      <td><span class="rname">${r.k}</span><div class="who">${r.perDay} per day${r.sevenDay?' · 7 days a week':''}</div>
+          ${r.units?`<button class="unit-btn" id="${uid}-btn" onclick="toggleUnits('${uid}')">Detail ▾</button>`:''}</td>
       <td><span class="rname" style="font-weight:600">${esc(ownerFor(r.k,rstate.proj))}</span>
           <div class="who">${r.whoN?'filed by '+esc(r.whoAll.slice(0,2).map(([n,c])=>disp(n)+' ('+c+')').join(', ')):'nobody filed'}</div></td>
       <td class="num">${fmt(r.workDays)}</td>
@@ -1467,7 +1928,8 @@ function renderMonth(){
       <td class="num">${r.short?`<span class="pill p-bad">${fmt(r.short)}</span>`:'<span class="zero">0</span>'}</td>
       <td><span class="covbar"><i style="width:${r.pct}%;background:${cls(r.pct)}"></i></span>
           <span class="who">${r.pct.toFixed(0)}%</span></td>
-      <td>${badge(r.pct)}</td></tr>`;}).join('');
+      <td>${badge(r.pct)}</td></tr>
+      ${r.units?`<tr id="${uid}" class="unit-row" style="display:none"><td colspan="8">${unitPanel(r)}</td></tr>`:''}`;}).join('');
 
   document.getElementById('rptMissing').innerHTML=live.filter(r=>r.missDays.length).map(r=>`
     <div class="miss-block"><div class="h">${r.k}
@@ -1654,14 +2116,17 @@ function buildFromGviz(dept,json){
     return t?'OTHER':'';};
   /* a check column only counts if its answers really are OK / Not-Okay */
   const qs=qCand.filter(q=>{
-    let good=0,other=0;
+    let good=0;
     rowsRaw.forEach(r=>{const v=normStat(cellStr((r.c||[])[q.i]));
-      if(v==='OK'||v==='Not-Okay')good++; else if(v==='OTHER')other++;});
-    return good>0 && other===0;
+      if(v==='OK'||v==='Not-Okay')good++;});
+    return good>0;
   }).map(q=>({k:q.key,t:q.text,i:q.i}));
 
   const ppl=[],pidx={},projs=[],prj={},units=[],uidx={};
   const rows=[],notes={};
+  /* melted / long-format rows: one entry per answered attribute per sheet, used by the
+     Raw Data tab. Kept separate from `rows` (which stays compact for the charts). */
+  const long=[];
   rowsRaw.sort((a,b)=>cellDate(a.c[tsI])-cellDate(b.c[tsI]));
   rowsRaw.forEach((r,ri)=>{
     const c=r.c||[], ts=cellDate(c[tsI]);
@@ -1674,19 +2139,22 @@ function buildFromGviz(dept,json){
     const uv=unitI>=0?cellStr(c[unitI]).trim():'';
     let ui=-1;
     if(uv){ if(!(uv in uidx)){uidx[uv]=units.length;units.push(uv);} ui=uidx[uv]; }
+    const dISO=iso(ts);
     let st='',pics='';
     qs.forEach((q,qi)=>{
       const v=normStat(cellStr(c[q.i]));
       st += v==='OK'?'1':v==='Not-Okay'?'2':'0';
       const pi=picOf[q.k];
-      pics += (pi!=null && cellStr(c[pi]))?'1':'0';
-      if(v==='Not-Okay'){
-        const ci=cmtOf[q.k];
-        const note=ci!=null?cellStr(c[ci]).trim():'';
-        if(note)notes[ri+'_'+qi]=note.slice(0,400);
+      const picVal = pi!=null?cellStr(c[pi]).trim():'';
+      pics += picVal?'1':'0';
+      const ci=cmtOf[q.k];
+      const cmtVal = ci!=null?cellStr(c[ci]).trim():'';
+      if(v==='Not-Okay'&&cmtVal)notes[ri+'_'+qi]=cmtVal.slice(0,400);
+      if(v==='OK'||v==='Not-Okay'){
+        long.push({d:dISO,p:pv,u:uv,a:q.t,r:v,c:cmtVal,pic:picVal});
       }
     });
-    rows.push([iso(ts),st,pidx[key],(apprI>=0&&/approved/i.test(cellStr(c[apprI])))?1:0,pics,
+    rows.push([dISO,st,pidx[key],(apprI>=0&&/approved/i.test(cellStr(c[apprI])))?1:0,pics,
                (qcsI>=0&&cellStr(c[qcsI]))?1:0,prj[pv],
                Math.round((ts.getHours()+ts.getMinutes()/60)*100)/100, ui]);
   });
@@ -1694,7 +2162,7 @@ function buildFromGviz(dept,json){
      so a fifth lift added tomorrow raises the requirement on its own */
   const unitLabel = unitI>=0?headers[unitI]:'';
   const expected  = /lift/i.test(unitLabel) ? units.length : 0;
-  return {qs:qs.map(q=>({k:q.k,t:q.t})),ppl,rows,notes,projs,hasProj:prjI>=0,
+  return {qs:qs.map(q=>({k:q.k,t:q.t})),ppl,rows,notes,long,projs,hasProj:prjI>=0,
           projHeader:prjI>=0?headers[prjI]:'',
           units,unitLabel,expected,hasQcs:qcsI>=0,headers};
 }
@@ -1749,14 +2217,130 @@ function refreshAll(){
       `<option value="${m}">${new Date(m+'-01T00:00:00').toLocaleDateString('en-GB',{month:'long',year:'numeric'})}</option>`).join('');
     ms.value=rstate.month;renderMonth();
   }
+  if(vis('rawview'))renderRawFilters();
 }
 
 function openSync(){
-  ['home','dashview','mgrview','monthview'].forEach(id=>document.getElementById(id).style.display='none');
+  ['home','dashview','mgrview','monthview','rawview'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('syncview').style.display='';
-  ['tab-home','tab-dash','tab-mgr','tab-month'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  ['tab-home','tab-dash','tab-mgr','tab-month','tab-raw'].forEach(id=>document.getElementById(id).classList.remove('active'));
   document.getElementById('tab-sync').classList.add('active');
   window.scrollTo(0,0);renderSync();
+}
+
+function openRaw(){
+  ['home','dashview','mgrview','monthview','syncview'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('rawview').style.display='';
+  ['tab-home','tab-dash','tab-mgr','tab-month','tab-sync'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.getElementById('tab-raw').classList.add('active');
+  window.scrollTo(0,0);
+  renderRawFilters();
+}
+
+function allLongRows(){
+  const out=[];
+  ORDER.forEach(k=>{
+    const arr=(RAW[k]&&RAW[k].long)||[];
+    for(let i=0;i<arr.length;i++){
+      const e=arr[i];
+      if(e.seg!==k)e.seg=k;
+      out.push(e);
+    }
+  });
+  return out;
+}
+
+function rawHasData(){
+  return ORDER.some(k=>RAW[k]&&RAW[k].long&&RAW[k].long.length);
+}
+
+function renderRawFilters(){
+  const segSel=document.getElementById('rw-seg');
+  if(!segSel.dataset.built){
+    segSel.innerHTML='<option value="">All</option>'+ORDER.map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join('');
+    segSel.dataset.built='1';
+  }
+  const seg=segSel.value;
+  const all=allLongRows();
+  const scoped = seg ? all.filter(e=>e.seg===seg) : all;
+
+  const ySel=document.getElementById('rw-year'), curY=ySel.value;
+  const years=[...new Set(scoped.map(e=>e.d.slice(0,4)))].sort();
+  ySel.innerHTML='<option value="">All</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');
+  ySel.value = years.includes(curY) ? curY : '';
+  const year=ySel.value;
+
+  const byYear = year ? scoped.filter(e=>e.d.slice(0,4)===year) : scoped;
+  const mSel=document.getElementById('rw-month'), curM=mSel.value;
+  const months=[...new Set(byYear.map(e=>e.d.slice(5,7)))].sort();
+  mSel.innerHTML='<option value="">All</option>'+months.map(m=>
+    `<option value="${m}">${new Date('2000-'+m+'-01T00:00:00').toLocaleDateString('en-GB',{month:'long'})}</option>`).join('');
+  mSel.value = months.includes(curM) ? curM : '';
+  const month=mSel.value;
+
+  const byMonth = month ? byYear.filter(e=>e.d.slice(5,7)===month) : byYear;
+  const dSel=document.getElementById('rw-date'), curD=dSel.value;
+  const dates=[...new Set(byMonth.map(e=>e.d))].sort();
+  dSel.innerHTML='<option value="">All</option>'+dates.map(d=>
+    `<option value="${d}">${new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short'})}</option>`).join('');
+  dSel.value = dates.includes(curD) ? curD : '';
+
+  const gSel=document.getElementById('rw-gen'), curG=gSel.value;
+  const genUnits=(RAW['Genset']&&RAW['Genset'].units)||[];
+  gSel.innerHTML='<option value="">All</option>'+genUnits.map(u=>`<option value="${esc(u)}">${esc(u)}</option>`).join('');
+  if(genUnits.includes(curG)) gSel.value=curG;
+
+  const lSel=document.getElementById('rw-lift'), curL=lSel.value;
+  const liftUnits=(RAW['Elevator']&&RAW['Elevator'].units)||[];
+  lSel.innerHTML='<option value="">All</option>'+liftUnits.map(u=>`<option value="${esc(u)}">${esc(u)}</option>`).join('');
+  if(liftUnits.includes(curL)) lSel.value=curL;
+
+  const pSel=document.getElementById('rw-proj'), curP=pSel.value;
+  const projs=[...new Set(all.map(e=>e.p).filter(Boolean))].sort();
+  pSel.innerHTML='<option value="">All</option>'+projs.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');
+  if(projs.includes(curP)) pSel.value=curP;
+
+  renderRawTable();
+}
+
+function clearRawFilters(){
+  ['rw-year','rw-month','rw-date','rw-seg','rw-resp','rw-gen','rw-lift','rw-proj'].forEach(id=>document.getElementById(id).value='');
+  renderRawFilters();
+}
+
+function renderRawTable(){
+  const year=document.getElementById('rw-year').value;
+  const month=document.getElementById('rw-month').value;
+  const date=document.getElementById('rw-date').value;
+  const seg=document.getElementById('rw-seg').value;
+  const resp=document.getElementById('rw-resp').value;
+  const gen=document.getElementById('rw-gen').value;
+  const lift=document.getElementById('rw-lift').value;
+  const proj=document.getElementById('rw-proj').value;
+
+  let rows=allLongRows();
+  if(date) rows=rows.filter(e=>e.d===date);
+  else if(month) rows=rows.filter(e=>e.d.slice(5,7)===month && (!year||e.d.slice(0,4)===year));
+  else if(year) rows=rows.filter(e=>e.d.slice(0,4)===year);
+  if(seg) rows=rows.filter(e=>e.seg===seg);
+  if(resp) rows=rows.filter(e=>e.r===resp);
+  if(gen) rows=rows.filter(e=>e.seg==='Genset'&&e.u===gen);
+  if(lift) rows=rows.filter(e=>e.seg==='Elevator'&&e.u===lift);
+  if(proj) rows=rows.filter(e=>e.p===proj);
+
+  rows.sort((a,b)=> a.d<b.d?1:a.d>b.d?-1:(a.seg<b.seg?-1:a.seg>b.seg?1:0));
+
+  const total=rows.length;
+  const shown=rows.slice(0,1000);
+  document.getElementById('rawMeta').textContent = !rawHasData()
+    ? 'Waiting for the first sync to load full comments and picture links… (this refreshes automatically a few seconds after the page opens)'
+    : `${fmt(total)} record${total===1?'':'s'} matching filters` + (total>shown.length ? ' · showing first '+fmt(shown.length) : '');
+
+  document.getElementById('rawRows').innerHTML = shown.map(e=>{
+    const cls = e.r==='Not-Okay' ? 'rw-bad' : 'rw-ok';
+    const pic = e.pic ? `<a href="${esc(e.pic)}" target="_blank" rel="noopener">${esc(e.pic)}</a>` : '';
+    return `<tr class="${cls}"><td>${esc(e.a)}</td><td>${esc(e.r)}</td><td>${esc(e.c||'')}</td><td>${pic}</td></tr>`;
+  }).join('') || '<tr><td colspan="4" class="empty-msg">No records match these filters</td></tr>';
 }
 function renderSync(){
   document.getElementById('syncRows').innerHTML=ORDER.map(k=>{
@@ -1842,7 +2426,25 @@ function tryUnlockGate(){
 rebuildDerived();
 syncInputs(); recompute(); renderHome();
 syncAll(false);
+/* the other tabs predate this view, so make sure they close it on the way out */
+['goHome','openProj','openMonth','openMgr','openSync','openRaw'].forEach(fn=>{
+  const orig=window[fn]; if(typeof orig!=='function')return;
+  window[fn]=function(){
+    const v=document.getElementById('dailyview'); if(v)v.style.display='none';
+    const t=document.getElementById('tab-daily'); if(t)t.classList.remove('active');
+    return orig.apply(this,arguments);
+  };
+});
+
 AUTO_TIMER=setInterval(()=>syncAll(false),5*60*1000);
 </script>
+<div class="sm-back" id="smBack" onclick="if(event.target===this)closeStat()">
+  <div class="sm" role="dialog" aria-modal="true">
+    <div class="sm-head"><h3 id="smTitle"></h3>
+      <button class="sm-x" onclick="closeStat()" title="Close">&times;</button>
+      <div class="sub" id="smSub"></div></div>
+    <div class="sm-body" id="smBody"></div>
+  </div>
+</div>
 </body>
 </html>
